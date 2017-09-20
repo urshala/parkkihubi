@@ -60,4 +60,4 @@ class PublicAPIParkingAreaStatisticsViewSet(viewsets.ReadOnlyModelViewSet):
                     )
                 )
             )
-        ).values('id', 'current_parking_count').order_by('origin_id')
+        ).values('id', 'current_parking_count').order_by('origin_id').filter(current_parking_count__gt=0)
