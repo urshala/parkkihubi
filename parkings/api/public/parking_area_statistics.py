@@ -1,3 +1,4 @@
+from dateutil.parser import parse as parse_datetime
 from django.db.models import Case, Count, Q, When
 from django.utils import timezone
 from rest_framework import permissions, serializers, viewsets
@@ -43,13 +44,18 @@ class PublicAPIParkingAreaStatisticsViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         now = timezone.now()
+        time_str = self.request.query_params.get('time', None)
+        try:
+            time = parse_datetime(time_str) if time_str else now
+        except ValueError:
+            time = now
 
         return ParkingArea.objects.annotate(
             current_parking_count=Count(
                 Case(
                     When(
-                        Q(parkings__time_start__lte=now) &
-                        (Q(parkings__time_end__gte=now) | Q(parkings__time_end__isnull=True)),
+                        Q(parkings__time_start__lte=time) &
+                        (Q(parkings__time_end__gte=time) | Q(parkings__time_end__isnull=True)),
                         then=1,
                     )
                 )
