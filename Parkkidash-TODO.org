@@ -1,0 +1,124 @@
+* Parkkihubi Parkkidash
+
+** Todo-list
+
+** DONE Front: Convert to TypeScript [8/8]
+   CLOSED: [2018-02-01 Thu 15:00]
+   - [X] Convert index and app to TS
+   - [X] Add @types packages
+   - [X] Convert api to TS
+   - [X] Make it compile
+   - [X] Create State interface
+     - [X] App.tsx -> search for state and dispatch
+   - [X] Convert rest JS files to TS
+     - [X] reducers
+     - [X] dispatchers
+     - [X] actions
+     - [X] components
+     - [X] containers
+   - [X] Fix import styles
+   - [X] Fix indentation
+
+** DONE Front: Fix Promise usage in api
+   CLOSED: [2018-02-01 Thu 16:07]
+
+** DONE Front: Check all dependencies are really needed (package.json)
+   CLOSED: [2018-02-01 Thu 16:13]
+
+** DONE Front: Reorder commits
+   CLOSED: [2018-02-01 Thu 17:09]
+
+** DONE Back: Region importer
+   - Will also fill Region Capacity estimates
+   CLOSED: [2018-02-02 Fri 15:11]
+
+** DONE Back: Management command to fill region fields of Parking objects
+   CLOSED: [2018-02-02 Fri 16:53]
+
+** DONE Back: Reorder commits
+   CLOSED: [2018-02-03 Sat 10:29]
+
+** DONE Login [6/6]
+   CLOSED: [2018-02-08 Thu 06:41]
+   - [X] Back: Endpoint for login
+     - [X] Get verification token with username and password
+       - Generate verification token, VerificationToken
+         - user: FK, foreign key to the user
+         - token: str, randomly generated
+         - expires_at: datetime, 5 minutes in the future
+         - verification_code: str, randomly generated 7 digit number
+       - Send verification code to user's e-mail address
+     - [X] Get login token with verification token and verification code
+       - Implement max tries (e.g. 5) so that verification code cannot
+         be brute forced
+   - [X] Front: LoginForm component
+   - [X] Front: Move structure from App to Dashboard
+   - [X] Front: Add Logout button to Dashboard
+   - [X] Front: Router that shows login form or Dashboard
+
+** DONE Back: Move API endpoints to correct directory
+   CLOSED: [2018-02-08 Thu 11:26]
+
+** DONE Front: Add MIT license
+   CLOSED: [2018-02-08 Thu 12:40]
+
+** DONE Back: Set permissions for the new APIs
+   CLOSED: [2018-02-08 Thu 14:06]
+
+** DONE Back: Unit tests for the new APIs
+   CLOSED: [2018-02-09 Fri 12:02]
+
+** TODO Back: Management command to Fix parking area geometries
+
+** TODO Front: Handle authentication errors (status code 401)
+   - Should logout when signature expires
+
+** TODO Implement last parkings list (with total count) [/]
+   - [ ] Back: API endpoint for last parkings
+     - in selected region, at selected time
+     - should contain the location too (for future use)
+   - [ ] Front: Table component
+   - [ ] Front: LastParkingsTable container
+   - [ ] Front: Add LastParkingsTable to App
+
+** STARTED Front: Info of selected region
+
+** STARTED Implement Parkings count histogram (24h only)
+   - [-] Back: API endpoint for usage histogram
+     - in selected region, at selected end time
+     - start = end - 24h
+     - 12 x 2h bars
+   - [ ] Front: Component for usage histogram
+   - [ ] Front: API adapter for usage histogram data
+   - [ ] Front: Container for usage histogram
+   - [ ] Front: Add usage histogram to App
+
+** TODO Front: Show/hide register numbers toggle
+
+** TODO Front: Show last parkings on map
+
+** TODO Implement time selection to the histogram
+   - [ ] Back: Time choices to API endpoint
+     - Params:
+       - bar_length: integer, 1...
+       - bar_length_unit: seconds/hours/minutes/days/weeks/months/years
+       - bar_count: integer, 1...100
+   - [ ] Front: Time choices to API adapter
+   - [ ] Front: Time interval selector component
+   - [ ] Front: Time interval selector container
+   - [ ] Front: Time interval selector 
+     - Choices:
+       - __5m / 10 bars = 30s / bar, "5 minutes"
+       - __1h / 12 bars =  5m / bar, "1 hour"
+       - _12h / 12 bars =  1h / bar, "12 hours"
+       - _24h / 12 bars =  2h / bar, "24 hours"
+       - __7d / 14 bars = 12h / bar, "1 week"
+       - _14d / 14 bars =  1d / bar, "2 weeks"
+       - _30d / 15 bars =  2d / bar, "30 days"
+       - _91d / 13 bars =  1w / bar, "91 days"
+       - 182d / 13 bars =  2w / bar, "182 days"
+       - __1y / 12 bars =  1M / bar, "1 year"
+       - __3y / 12 bars =  3M / bar, "3 years"
+       - _10y / 10 bars =  1Y / bar, "10 years"
+
+** TODO Front: Implement purging of old time slices
