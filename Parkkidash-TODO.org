@@ -73,13 +73,16 @@
 ** TODO Front: Handle authentication errors (status code 401)
    - Should logout when signature expires
 
-** TODO Implement last parkings list (with total count) [/]
-   - [ ] Back: API endpoint for last parkings
+** DONE Implement last parkings list (with total count) [6/6]
+   CLOSED: [2018-02-12 Mon 03:13]
+   - [X] Back: API endpoint for last parkings
      - in selected region, at selected time
      - should contain the location too (for future use)
-   - [ ] Front: Table component
-   - [ ] Front: LastParkingsTable container
-   - [ ] Front: Add LastParkingsTable to App
+   - [X] Front: Table component (Use react-table)
+   - [X] Front: Add LastParkingsTable to App
+   - [X] Front: api for fetching table data
+   - [X] Front: State, actions, reducers for valid parkings
+   - [X] Front: LastParkingsTable container
 
 ** STARTED Front: Info of selected region
 
