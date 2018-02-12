@@ -68,7 +68,9 @@
 ** DONE Back: Unit tests for the new APIs
    CLOSED: [2018-02-09 Fri 12:02]
 
-** TODO Back: Management command to Fix parking area geometries
+** STARTED Back: Management command to Fix parking area geometries [/]
+   - [X] Implement the script
+   - [ ] Tests for the script
 
 ** TODO Front: Handle authentication errors (status code 401)
    - Should logout when signature expires
