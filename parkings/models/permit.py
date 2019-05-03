@@ -64,7 +64,7 @@ class Permit(TimestampedModelMixin, UUIDPrimaryKeyMixin, models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     _subjects = models.CharField(max_length=1000)
-    _areas = models.CharField(max_length=100)
+    _areas = models.CharField(max_length=200)
 
     objects = PermitQuerySet.as_manager()
 

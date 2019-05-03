@@ -38,7 +38,6 @@ class ValidParkingFilter(django_filters.rest_framework.FilterSet):
     class Meta:
         model = Parking
         fields = []
-        strict = django_filters.STRICTNESS.RAISE_VALIDATION_ERROR
 
     def __init__(self, data=None, *args, **kwargs):
         """

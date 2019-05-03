@@ -21,7 +21,6 @@ class ValidParkingFilter(django_filters.rest_framework.FilterSet):
             'region',
             'zone',
         ]
-        strict = django_filters.STRICTNESS.RAISE_VALIDATION_ERROR
 
     def filter_time(self, queryset, name, value):
         return queryset.valid_at(value)
