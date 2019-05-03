@@ -13,7 +13,7 @@ psycopg2
 # Django REST Framework
 djangorestframework
 djangorestframework-gis
-django-filter
+django-filter>=2.1.0
 drf-jwt-2fa
 
 # XML parsing
