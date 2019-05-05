@@ -37,6 +37,7 @@ class PermitSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'series',
+            'external_id',
             'start_time',
             'end_time',
             'subjects',
@@ -49,7 +50,7 @@ class PermitViewSet(viewsets.ModelViewSet):
     queryset = Permit.objects.all()
     serializer_class = PermitSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['series']
+    filterset_fields = ['series', 'external_id']
 
     def get_serializer(self, *args, **kwargs):
         if isinstance(kwargs.get('data', {}), list):

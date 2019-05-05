@@ -61,6 +61,8 @@ class PermitQuerySet(models.QuerySet):
 
 class Permit(TimestampedModelMixin, UUIDPrimaryKeyMixin, models.Model):
     series = models.ForeignKey(PermitSeries, on_delete=models.PROTECT)
+    external_id = models.CharField(
+        max_length=50, null=True, blank=True, unique=True)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     _subjects = models.CharField(max_length=1000)
