@@ -61,14 +61,16 @@ class PermitQuerySet(models.QuerySet):
 
 class Permit(TimestampedModelMixin, models.Model):
     series = models.ForeignKey(PermitSeries, on_delete=models.PROTECT)
-    external_id = models.CharField(
-        max_length=50, null=True, blank=True, unique=True)
+    external_id = models.CharField(max_length=50, null=True, blank=True)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     _subjects = models.CharField(max_length=1000)
     _areas = models.CharField(max_length=200)
 
     objects = PermitQuerySet.as_manager()
+
+    class Meta:
+        unique_together = [('series', 'external_id')]
 
     def __init__(self, *args, **kwargs):
         subjects = kwargs.pop('subjects', None)
