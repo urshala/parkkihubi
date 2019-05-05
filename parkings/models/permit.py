@@ -71,6 +71,10 @@ class Permit(TimestampedModelMixin, models.Model):
 
     class Meta:
         unique_together = [('series', 'external_id')]
+        indexes = [
+            models.Index(fields=['series', 'start_time', '-end_time', 'id']),
+        ]
+        ordering = ('series', 'start_time', '-end_time', 'id')
 
     def __init__(self, *args, **kwargs):
         subjects = kwargs.pop('subjects', None)
