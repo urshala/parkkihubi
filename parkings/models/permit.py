@@ -59,7 +59,7 @@ class PermitQuerySet(models.QuerySet):
             sep=self.sep, key=area_identifier))
 
 
-class Permit(TimestampedModelMixin, UUIDPrimaryKeyMixin, models.Model):
+class Permit(TimestampedModelMixin, models.Model):
     series = models.ForeignKey(PermitSeries, on_delete=models.PROTECT)
     external_id = models.CharField(
         max_length=50, null=True, blank=True, unique=True)
