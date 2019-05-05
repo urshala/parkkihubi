@@ -37,6 +37,9 @@ from .mixins import TimestampedModelMixin, UUIDPrimaryKeyMixin
 class PermitSeries(TimestampedModelMixin, models.Model):
     active = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ('created_at', 'id')
+
     def __str__(self):
         return str(self.id)
 
