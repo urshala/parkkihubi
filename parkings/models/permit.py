@@ -3,37 +3,6 @@ from django.db import models
 from .mixins import TimestampedModelMixin, UUIDPrimaryKeyMixin
 
 
-# class PermitArea(models.Model):
-#     identifier = models.CharField(max_length=50, primary_key=True)
-
-#     def __str__(self):
-#         return self.identifier
-
-
-# class PermitSubject(models.Model):
-#     registration_number = models.CharField(max_length=20, primary_key=True)
-
-#     def __str__(self):
-#         return self.registration_number
-
-
-# class Permit(TimestampedModelMixin, UUIDPrimaryKeyMixin):
-#     start_time = models.DateTimeField()
-#     end_time = models.DateTimeField()
-#     subjects = models.ManyToManyField(PermitSubject, related_name='permits')
-#     areas = models.ManyToManyField(PermitArea, related_name='permits')
-
-#     def __str__(self):
-#         return (
-#             '{start_time:%Y-%m-%d %H:%M} -- {end_time:%Y-%m-%d %H:%M} / '
-#             '{subjects} / {areas}'
-#         ).format(
-#             start_time=self.start_time,
-#             end_time=self.end_time,
-#             subjects=' '.join(sorted(str(x) for x in self.subjects.all())),
-#             areas=' '.join(sorted(str(x) for x in self.areas.all())))
-
-
 class PermitSeries(TimestampedModelMixin, models.Model):
     active = models.BooleanField(default=False)
 
