@@ -74,6 +74,7 @@ class PermitSerializer(serializers.ModelSerializer):
             'subjects',
             'areas',
         ]
+        read_only_fields = ['id', 'series']
 
 
 class PermitViewSet(viewsets.ModelViewSet):
