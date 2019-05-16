@@ -29,10 +29,10 @@ class ValidParkingSerializer(serializers.ModelSerializer):
 
 class ValidParkingFilter(django_filters.rest_framework.FilterSet):
     reg_num = django_filters.CharFilter(
-        name='reg_num', label=_("Registration number"),
+        label=_("Registration number"),
         method='filter_reg_num', required=True)
     time = django_filters.IsoDateTimeFilter(
-        name='time', label=_("Time"),
+        label=_("Time"),
         method='filter_time')
 
     class Meta:
