@@ -4,6 +4,7 @@ from rest_framework.routers import DefaultRouter
 from ..url_utils import versioned_url
 from .parking import OperatorAPIParkingViewSet
 from .enforcement_domain import EnforcementDomainView
+from .permit import OperatorPermitViewSet, OperatorPermitSeriesViewSet, OperatorEnforcementActivePermitByExternalViewSet
 
 
 class Router(DefaultRouter):
@@ -21,6 +22,9 @@ class Router(DefaultRouter):
 
 router = Router()
 router.register(r'parking', OperatorAPIParkingViewSet)
+router.register(r'permitseries', OperatorPermitSeriesViewSet)
+router.register(r'permit', OperatorPermitViewSet)
+router.register(r'active_permit_by_external_id', OperatorEnforcementActivePermitByExternalViewSet)
 
 app_name = 'operator'
 urlpatterns = [

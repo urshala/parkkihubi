@@ -40,7 +40,8 @@ class Migration(migrations.Migration):
             name='domain',
             field=models.ForeignKey(
                 to='parkings.EnforcementDomain',
-                default=1,
+                blank=True,
+                null=True,
                 on_delete=models.PROTECT,
                 related_name='parkings'),
             preserve_default=False,
@@ -50,7 +51,8 @@ class Migration(migrations.Migration):
             name='domain',
             field=models.ForeignKey(
                 to='parkings.EnforcementDomain',
-                default=1,
+                blank=True,
+                null=True,
                 on_delete=models.PROTECT,
                 related_name='permit_areas'),
             preserve_default=False,

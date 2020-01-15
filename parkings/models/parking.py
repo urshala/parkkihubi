@@ -79,7 +79,7 @@ class Parking(TimestampedModelMixin, UUIDPrimaryKeyMixin):
         verbose_name=_("parking end time"), db_index=True, null=True, blank=True,
     )
     domain = models.ForeignKey(
-        EnforcementDomain, on_delete=models.PROTECT,
+        EnforcementDomain, on_delete=models.PROTECT, null=True, blank=True,
         related_name='parkings')
     zone = models.IntegerField(
         verbose_name=_("zone number"),

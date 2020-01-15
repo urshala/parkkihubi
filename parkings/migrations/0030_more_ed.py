@@ -20,13 +20,22 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='paymentzone',
             name='domain',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.PROTECT, to='parkings.EnforcementDomain'),
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.PROTECT,
+                to='parkings.EnforcementDomain'),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='permit',
             name='domain',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.PROTECT, related_name='permits', to='parkings.EnforcementDomain'),
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.PROTECT,
+                related_name='permits',
+                to='parkings.EnforcementDomain'),
             preserve_default=False,
         ),
         migrations.AlterField(

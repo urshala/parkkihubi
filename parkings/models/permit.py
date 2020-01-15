@@ -18,7 +18,7 @@ from .parking import Parking
 class PermitArea(TimestampedModelMixin, UUIDPrimaryKeyMixin):
     name = models.CharField(max_length=40, verbose_name=_('name'))
     domain = models.ForeignKey(
-        EnforcementDomain, on_delete=models.PROTECT,
+        EnforcementDomain, on_delete=models.PROTECT, null=True, blank=True,
         related_name='permit_areas')
     identifier = models.CharField(max_length=10, verbose_name=_('identifier'))
     geom = gis_models.MultiPolygonField(
