@@ -14,7 +14,7 @@ from .mixins import TimestampedModelMixin, UUIDPrimaryKeyMixin
 from .parking import Parking
 
 
-class PermitArea(TimestampedModelMixin, UUIDPrimaryKeyMixin):
+class PermitArea(TimestampedModelMixin):
     name = models.CharField(max_length=40, verbose_name=_('name'))
     domain = models.ForeignKey(
         EnforcementDomain, on_delete=models.PROTECT,
@@ -136,6 +136,7 @@ class Permit(TimestampedModelMixin, models.Model):
             super(Permit, self).save(using=using, *args, **kwargs)
             self.lookup_items.all().using(using).delete()
             new_lookup_items = self._make_lookup_items()
+            print(new_lookup_items)
             PermitLookupItem.objects.using(using).bulk_create(new_lookup_items)
 
     def _make_lookup_items(self):
@@ -150,7 +151,7 @@ class Permit(TimestampedModelMixin, models.Model):
                     permit=self,
                     registration_number=Parking.normalize_reg_num(
                         subject['registration_number']),
-                    area_identifier=area['area'],
+                    area=PermitArea.objects.get(identifier=area['area']),
                     start_time=max_start_time,
                     end_time=min_end_time
                 )
@@ -168,14 +169,14 @@ class PermitLookupItemQuerySet(models.QuerySet):
         return self.filter(registration_number=normalized_reg_num)
 
     def by_area(self, area_identifier):
-        return self.filter(area_identifier=area_identifier)
+        return self.filter(area__identifier=area_identifier)
 
 
 class PermitLookupItem(models.Model):
     permit = models.ForeignKey(
         Permit, related_name="lookup_items", on_delete=models.CASCADE)
     registration_number = models.CharField(max_length=20)
-    area_identifier = models.CharField(max_length=10)
+    area = models.ForeignKey(PermitArea, on_delete=models.PROTECT, default=None, null=True, blank=True)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
 
@@ -185,15 +186,15 @@ class PermitLookupItem(models.Model):
         indexes = [
             models.Index(fields=[
                 'registration_number', 'start_time', 'end_time',
-                'area_identifier', 'permit']),
+                'area', 'permit']),
         ]
         ordering = ('registration_number', 'start_time', 'end_time')
 
     def __str__(self):
         return (
             '{start_time:%Y-%m-%d %H:%M} -- {end_time:%Y-%m-%d %H:%M} / '
-            '{registration_number} / {area_identifier}'
+            '{registration_number} / {area}'
         ).format(
             start_time=self.start_time, end_time=self.end_time,
             registration_number=self.registration_number,
-            area_identifier=self.area_identifier)
+            area=self.area.identifier)
